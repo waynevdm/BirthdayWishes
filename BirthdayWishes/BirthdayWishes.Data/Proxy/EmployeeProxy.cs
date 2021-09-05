@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeNofitication.Data.Proxy
 {
-    public class EmployeeProxy
+    public class EmployeeProxy : IEmployeeProxy
     {
         private readonly IHttpClientFactory _clientFactory;
         public EmployeeProxy(IHttpClientFactory clientFactory)
@@ -33,7 +33,6 @@ namespace EmployeeNofitication.Data.Proxy
                     response.EnsureSuccessStatusCode();
                     var responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                     var employeeList = JsonConvert.DeserializeObject<IList<Employee>>(responseBody);
-
                     return employeeList;
                 }
             }
